@@ -1,10 +1,10 @@
-#What?
+# What?
 
 This package creates a binary that is built from *cmd/main.go
 
 This binary can be zipped into a .zip file and then deployed as a lambda function
 
-#Description
+# Description
 
 When using AWS Elastic Disaster Recovery service every source machine has a corresponding launch templates. Launch templates cannot be edited in a batch using the native DRS tooling. This package is a lambda function that allows for editing a group of launch templates that all are tagged with a certain key in the DRS console.
 
@@ -15,7 +15,7 @@ For Example:
 
 - Create one launch template that applies to all replicating DRS servers.
 
-#Usage
+# Usage
 
 Create the Lambda Function:
 
