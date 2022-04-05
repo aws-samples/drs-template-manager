@@ -26,6 +26,7 @@ git clone https://github.com/aws-samples/drs-template-manager.git
 
 - Create the zip
 ```
+cd drs-template-manager
 cd cmd
 zip function.zip drs-template-manager
 ```
