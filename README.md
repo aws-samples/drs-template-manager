@@ -70,7 +70,7 @@ For Example:
 
 - Add the tag key 'DB' to all replicating databases. Rename 'Name.json' to 'DB.json' . Change the fields in the template to what you would like the values to be for databases. Then upload 'DB.json' to the bucket you created.
 
-#Build Locally
+# Build Locally
 
 You can build this locally if you have the go tooling installed
 ```
