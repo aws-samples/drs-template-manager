@@ -78,10 +78,10 @@ cd cmd
 GOOS=linux go build .
 ```
 
-#License
+# License
 
 This library is licensed under the MIT-0 License. See the LICENSE file.
 
-#Security
+# Security
 
 See CONTRIBUTING for more information.
