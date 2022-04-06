@@ -15,6 +15,9 @@ For Example:
 
 - Create one launch template that applies to all replicating DRS servers.
 
+![templatearch](https://user-images.githubusercontent.com/97046295/161995172-a5a3475e-319e-480a-9bb2-c1f32338e89b.png)
+
+
 # Usage
 
 Create the Lambda Function:
