@@ -24,7 +24,7 @@ Create the Lambda Function:
 
 - Clone the repo
 ```
-git clone https://github.com/aws-samples/drs-template-manager.git
+git@ssh.gitlab.aws.dev:lewinke/drs-template-manager.git
 ```
 
 - Create the zip
