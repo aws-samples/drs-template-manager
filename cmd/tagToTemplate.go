@@ -43,8 +43,8 @@ func getSource() (srcServerList []*drs.DescribeSourceServersOutput) {
 func getTags() (taglist map[string]map[string]string) {
 	servers := getSource()
 	taglist = make(map[string]map[string]string)
-	for _, i := range servers {
-		for _, v := range i.Items {
+	for _, sourceServer := range servers {
+		for _, v := range sourceServer.Items {
 			taglist[awsv2.ToString(v.SourceServerID)] = awsv2.ToStringMap(v.Tags)
 		}
 	}
@@ -52,8 +52,7 @@ func getTags() (taglist map[string]map[string]string) {
 }
 
 //Function to match a certain tag with the launch template to update.
-//Get the maps of tag keys. can try to implement values later. this is good for v1
-func getSourceIds(object string) (sourceServerList []string) {
+func getSourceServerIdsWithTag(object string) (sourceServerList []string) {
 	key := object
 	formatKey := strings.Split(key, ".")[0]
 	tagMap := getTags()
@@ -66,23 +65,23 @@ func getSourceIds(object string) (sourceServerList []string) {
 	return sourceServerList
 }
 
-func getLaunchTemplates(object string) (templateId []string) {
+func getLaunchTemplates(object string) (ec2LaunchTemplateList []string) {
 	// Load session from shared config
 	sess := session.Must(session.NewSessionWithOptions(session.Options{
 		SharedConfigState: session.SharedConfigEnable,
 	}))
 
 	//Create DRS Client
-	drsSvc := drs.New(sess, &aws.Config{Region: aws.String("us-west-2")})
+	drsSvc := drs.New(sess)
 
 	//Get launch configuration for all source server IDs
-	serverList := getSourceIds(object)
+	serverList := getSourceServerIdsWithTag(object)
 	for _, i := range serverList {
 		launchConfig, err := drsSvc.GetLaunchConfiguration(&drs.GetLaunchConfigurationInput{
 			SourceServerID: aws.String(i),
 		})
 		check(err)
-		templateId = append(templateId, *launchConfig.Ec2LaunchTemplateID)
+		ec2LaunchTemplateList = append(ec2LaunchTemplateList, *launchConfig.Ec2LaunchTemplateID)
 	}
-	return templateId
+	return ec2LaunchTemplateList
 }

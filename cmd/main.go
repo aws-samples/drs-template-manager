@@ -33,8 +33,8 @@ func SetTemplates(ctx context.Context, s3Event events.S3Event) {
 	//Get list of launch templates to update.
 	templates := getLaunchTemplates(object)
 	//Create new template version and set it as default for all servers that match template prefix
-	for _, i := range templates {
-		loadTemplate(i, TemplateDat)
+	for _, templateId := range templates {
+		loadTemplate(templateId, TemplateDat)
 	}
 }
 
