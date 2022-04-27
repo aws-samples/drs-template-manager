@@ -139,6 +139,12 @@ aws s3api create-bucket \
     - Check the box for 'All object create events'
     - Set the destination as the previously created lambda function.
 
+- Update the cron function to take in the bucket created earlier as an environment variable
+```
+aws lambda update-function-configuration \
+--environment Variables={BUCKET=$SOMEUNIQUEBUCKETNAME}
+```
+
 Create a template:
 
 - The repo comes with an example [launch template](https://docs.aws.amazon.com/drs/latest/userguide/ec2-launch.html) called 'Name.json' . The prefix of the .json file indicates which tag will be updated.
