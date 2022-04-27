@@ -17,7 +17,7 @@ For Example:
 
 # The Architecture
 
-![templatearch](https://user-images.githubusercontent.com/97046295/161995172-a5a3475e-319e-480a-9bb2-c1f32338e89b.png)
+![template-updated drawio](https://user-images.githubusercontent.com/97046295/165619622-780e7448-4832-4a10-8696-938336314847.png)
 
 This solution is composed of the following components:
 
@@ -77,7 +77,7 @@ cd ../cmd-cron
 zip cron.zip template-cron-automation
 ```
 
-- Make two new GO lambda function in the same region as your DRS replicating servers and use the '.zip' files created above as the deployment packages. Under "Runtime Settings" Set the Handler to 'drs-template-manager' for the function that sets the templates and 'template-cron-automation' for the scheduler. The architecture should be x86 and the Runtime should be Go 1.x .
+Make two new GO lambda function in the same region as your DRS replicating servers and use the '.zip' files created above as the deployment packages. Under "Runtime Settings" Set the Handler to 'drs-template-manager' for the function that sets the templates and 'template-cron-automation' for the scheduler. The architecture should be x86 and the Runtime should be Go 1.x . :
 
 * Create the 'schedule-drs-templates' function, replace '$INSERTROLEARN' with the arn of the role you created for the solution.
 ```
