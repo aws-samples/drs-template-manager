@@ -31,7 +31,7 @@ This solution is composed of the following components:
 
 In order to use this solution, it is required to have actively replicating servers in DRS. For more information on getting started with DRS reference the [quick start guide](https://docs.aws.amazon.com/drs/latest/userguide/getting-started.html).
 
-Part of this solution is creating a lambda function which needs to make API calls to  DRS, EC2, and S3. It is required to have a role with the proper permissions to access all three services. You can create a role with 3 managed policies for simplicity:
+Part of this solution is creating lambda functions which need to make API calls to  DRS, EC2, and S3. It is required to have a role with the proper permissions to access all three services. You can create a role with 3 managed policies for simplicity:
 
 - "AWSElasticDisasterRecoveryReadOnlyAccess"
 
