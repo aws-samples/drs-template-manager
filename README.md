@@ -1,6 +1,6 @@
 # What?
 
-This package creates binaries that are built from *cmd*/main.go
+This package creates binaries that are built from cmd*/main.go
 
 These binaries can be zipped into .zip files and then deployed as lambda functions.
 
