@@ -67,7 +67,7 @@ git clone https://github.com/aws-samples/drs-template-manager.git
 * Create the zip deployment package of the 'set-drs-templates' function.
 ```
 cd drs-template-manager
-cd cmd
+cd cmd-template
 zip template.zip drs-template-manager
 ```
 
@@ -83,7 +83,7 @@ Make two new GO lambda function in the same region as your DRS replicating serve
 ```
 aws lambda create-function \            
 --function-name schedule-drs-templates \
---role $INSERTROLEARN
+--role $INSERTROLEARN \
 --runtime go1.x \
 --handler template-cron-automation \
 --package-type Zip \
@@ -95,7 +95,7 @@ aws lambda create-function \
 cd ../cmd-template
 aws lambda create-function \            
 --function-name set-drs-templates \
---role $INSERTROLEARN
+--role $INSERTROLEARN \
 --runtime go1.x \
 --handler drs-template-manager \
 --package-type Zip \
@@ -142,12 +142,13 @@ aws s3api create-bucket \
 - Update the cron function to take in the bucket created earlier as an environment variable
 ```
 aws lambda update-function-configuration \
+--function-name schedule-drs-templates \
 --environment Variables={BUCKET=$SOMEUNIQUEBUCKETNAME}
 ```
 
 Create a template:
 
-- The repo comes with an example [launch template](https://docs.aws.amazon.com/drs/latest/userguide/ec2-launch.html) called 'Name.json' . The prefix of the .json file indicates which tag will be updated.
+- The repo comes with an example [launch template](https://docs.aws.amazon.com/drs/latest/userguide/ec2-launch.html) called 'Name.json' in the 'cmd-template' directory. The prefix of the .json file indicates which tag will be updated.
 
 For Example:
 
@@ -163,8 +164,8 @@ cd cmd-cron
 GOOS=linux go build .
 ```
 
-```
-cd cmd-template
+``` 
+cd ../cmd-template
 GOOS=linux go build .
 ```
 
