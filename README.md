@@ -29,29 +29,13 @@ This solution is composed of the following components:
 
 # Prerequisites
 
-In order to use this solution, it is required to have actively replicating servers in DRS. For more information on getting started with DRS reference the [quick start guide](https://docs.aws.amazon.com/drs/latest/userguide/getting-started.html).
+In order to use this solution, it is required to have active servers in DRS. For more information on getting started with DRS reference the [quick start guide](https://docs.aws.amazon.com/drs/latest/userguide/getting-started.html).
 
-Part of this solution is creating lambda functions which need to make API calls to  DRS, EC2, and S3. It is required to have a role with the proper permissions to access all three services. You can create a role with 3 managed policies for simplicity:
+The provided deployment instructions utilize the [AWS CLI](https://aws.amazon.com/cli/)
 
-- "AWSElasticDisasterRecoveryReadOnlyAccess"
+Part of this solution is creating lambda functions which need to make API calls to  DRS, EC2, and S3. It is required to have a role with the proper permissions to access all three services. You can create a role with the provided 'policy.json' in order to give the solution the proper API access.
 
-- "AmazonEC2FullAccess"
-
-- "AmazonS3FullAccess"
-
-Here is a full list of API calls made by the solution if you would like to create a more granular policy:
-
-- "drs.DescribeSourceServers"
-
-- "drs.GetLaunchConfiguration"
-
-- "s3.GetObject"
-
-- "s3.PutObject"
-
-- "ec2.CreateLaunchTemplateVersion"
-
-- "ec2.ModifyLaunchTemplate"
+The policy has been created to only allow the minimum required permissions to ensure the solution is functional.
 
 # Usage
 
@@ -77,7 +61,7 @@ cd ../cmd-cron
 zip cron.zip template-cron-automation
 ```
 
-Make two new GO lambda function in the same region as your DRS replicating servers and use the '.zip' files created above as the deployment packages. Under "Runtime Settings" Set the Handler to 'drs-template-manager' for the function that sets the templates and 'template-cron-automation' for the scheduler. The architecture should be x86 and the Runtime should be Go 1.x . :
+Make two new GO lambda functions in the same region as your DRS replicating servers and use the '.zip' files created above as the deployment packages. Under "Runtime Settings" Set the Handler to 'drs-template-manager' for the function that sets the templates and 'template-cron-automation' for the scheduler. The architecture should be x86 and the Runtime should be Go 1.x . :
 
 * Create the 'schedule-drs-templates' function, replace '$INSERTROLEARN' with the arn of the role you created for the solution.
 ```
