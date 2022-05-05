@@ -35,7 +35,15 @@ The provided deployment instructions utilize the [AWS CLI](https://aws.amazon.co
 
 Part of this solution is creating lambda functions which need to make API calls to  DRS, EC2, and S3. It is required to have a role with the proper permissions to access all three services. You can create a role with the provided 'policy.json' in order to give the solution the proper API access.
 
-The policy has been created to only allow the minimum required permissions to ensure the solution is functional.
+The policy has been created to only allow the minimum required permissions to ensure the solution is functional:
+
+* "s3:PutObject"
+* "s3:GetObject"
+* "drs:DescribeSourceServers"
+* "ec2:ModifyLaunchTemplate"
+* "s3:ListBucket"
+* "ec2:CreateLaunchTemplateVersion"
+* "drs:GetLaunchConfiguration"
 
 # Usage
 
@@ -133,6 +141,8 @@ aws lambda update-function-configuration \
 Create a template:
 
 - The repo comes with an example [launch template](https://docs.aws.amazon.com/drs/latest/userguide/ec2-launch.html) called 'Name.json' in the 'cmd-template' directory. The prefix of the .json file indicates which tag will be updated.
+
+**Important Note: If a source server has tags that match two different templates, the server will take on the template that is last uploaded to the S3 bucket**
 
 For Example:
 
