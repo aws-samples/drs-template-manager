@@ -142,6 +142,8 @@ Create a template:
 
 - The repo comes with an example [launch template](https://docs.aws.amazon.com/drs/latest/userguide/ec2-launch.html) called 'Name.json' in the 'cmd-template' directory. The prefix of the .json file indicates which tag will be updated.
 
+** Important Note: If a source server has tags that match two different templates, the server will take on the template that is last uploaded to the S3 bucket **
+
 For Example:
 
 - All servers with the tag key 'Name' will be updated when 'Name.json' is uploaded to the S3 bucket. Since DRS tags all servers with a 'Name' tag by default. All servers will have their template updated.
