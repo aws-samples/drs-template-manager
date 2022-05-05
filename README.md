@@ -142,7 +142,7 @@ Create a template:
 
 - The repo comes with an example [launch template](https://docs.aws.amazon.com/drs/latest/userguide/ec2-launch.html) called 'Name.json' in the 'cmd-template' directory. The prefix of the .json file indicates which tag will be updated.
 
-** Important Note: If a source server has tags that match two different templates, the server will take on the template that is last uploaded to the S3 bucket **
+**Important Note: If a source server has tags that match two different templates, the server will take on the template that is last uploaded to the S3 bucket**
 
 For Example:
 
