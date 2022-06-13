@@ -110,7 +110,7 @@ aws events put-targets \
 --targets "Id"="1","Arn"=$FunctionARN
 ```
 
-* Create a resource-based policy to allow the template-cron-rule permission to call the scheduled-drs-templates function where $STATEMENTID is an identified that differentiates the statement from others in the same policy and $TEMPLATE-CRON-RULE-ARN is the Rule ARN of the event rule: 
+* Create a resource-based policy to allow the template-cron-rule permission to call the scheduled-drs-templates function. $STATEMENTID is an identifier that differentiates the statement from others in the same policy and $TEMPLATE-CRON-RULE-ARN is the Rule ARN of the event rule: 
 ```
 aws lambda add-permission \
 --function-name schedule-drs-templates \
