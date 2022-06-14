@@ -110,7 +110,15 @@ aws events put-targets \
 --targets "Id"="1","Arn"=$FunctionARN
 ```
 
-
+* Create a resource-based policy to allow the template-cron-rule permission to call the scheduled-drs-templates function. $STATEMENTID is an identifier that differentiates the statement from others in the same policy and $TEMPLATE-CRON-RULE-ARN is the Rule ARN of the event rule: 
+```
+aws lambda add-permission \
+--function-name schedule-drs-templates \
+--action lambda:InvokeFunction \
+--statement-id $STATEMEINTID \ 
+--principal events.amazonaws.com \
+--source-arn $TEMPLATE-CRON-RULE-ARN \
+```
 
 Create the S3 bucket trigger for the 'set-drs-templates' function:
 
