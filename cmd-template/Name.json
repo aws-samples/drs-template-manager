@@ -67,16 +67,41 @@
 	"RamDiskId": null,
 	"SecurityGroupIds": null,
 	"SecurityGroups": null,
-	"TagSpecifications": [
-		{
-			"ResourceType": "instance",
-			"Tags": [
-				{
-					"Key": "template",
-					"Value": "demo"
-				}
-			]
-		}
-	],
+    "TagSpecifications": [
+        {
+            "ResourceType": "volume",
+            "Tags": [
+                {
+                    "Key": "AWSElasticDisasterRecoverySourceServerID",
+					"Value": "s-xxxxxxxxxxxxxxxxx"
+                },
+                {
+                    "Key": "Name",
+                    "Value": "YourServerNameHere"
+                },
+                {
+                    "Key": "AWSElasticDisasterRecoveryManaged",
+                    "Value": "drs.amazonaws.com"
+                }
+            ]
+        },
+        {
+            "ResourceType": "instance",
+            "Tags": [
+                {
+                    "Key": "AWSElasticDisasterRecoverySourceServerID",
+					"Value": "s-xxxxxxxxxxxxxxxxx"
+                },
+                {
+                    "Key": "Name",
+                    "Value": "YourServerNameHere"
+                },
+                {
+                    "Key": "AWSElasticDisasterRecoveryManaged",
+                    "Value": "drs.amazonaws.com"
+                }
+            ]
+        }
+    ],
 	"UserData": null
 }
