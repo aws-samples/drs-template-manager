@@ -148,7 +148,7 @@ Create a baseline template(s):
 
 Replicate the baseline template(s), one per source server, and then edit:
 
-- Open the template, locate the *AWSElasticDisasterRecoverySourceServerID* and *Name* keys for both volume and instance ResourceTypes. Update these values to match those of the source server. 
+- Open the template, locate the **AWSElasticDisasterRecoverySourceServerID** and **Name** keys for both volume and instance ResourceTypes. Update these values to match those of the source server. 
 
 - Be sure each source server has a tag that matches the JSON file prefix.
 
