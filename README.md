@@ -6,14 +6,7 @@ These binaries can be zipped into .zip files and then deployed as lambda functio
 
 # Description
 
-When using AWS Elastic Disaster Recovery Service (DRS) every source machine has a corresponding launch template. Launch templates cannot be edited in a batch using the native DRS tooling. This package is a set of lambda functions that allow for editing a group of launch templates that all are tagged with a certain key in the DRS console.
-
-For Example:
-- Create one launch template for all servers tagged 'DB'.
-
-- Create one launch template for all servers tagged to a certain application.
-
-- Create one launch template that applies to all replicating DRS servers.
+When using AWS Elastic Disaster Recovery Service (DRS) every source server has a corresponding launch template. Launch templates cannot be edited in a batch using the native DRS tooling. This solution will enable you to use a single file as a baseline template that can be replicated, edited, and used for each source server tagged with a corresponding key in the DRS console.
 
 # The Architecture
 
@@ -45,9 +38,9 @@ The policy has been created to only allow the minimum required permissions to en
 * "ec2:CreateLaunchTemplateVersion"
 * "drs:GetLaunchConfiguration"
 
-# Usage
+# Deployment
 
-Deploying the solution is composed of three main steps. Create the lambda functions, Create the S3 bucket trigger, and Creating a template.
+Deploying the solution is composed of two main steps. Create the lambda functions and Create the S3 bucket trigger.
 
 Create the Lambda Functions:
 
@@ -145,18 +138,21 @@ aws lambda update-function-configuration \
 --function-name schedule-drs-templates \
 --environment Variables={BUCKET=$SOMEUNIQUEBUCKETNAME}
 ```
+# Usage
 
-Create a template:
+To use the solution, you'll need to create a baseline template, replicate it one per source server, then edit at least two tags in the file.
+
+Create a baseline template(s):
 
 - The repo comes with an example [launch template](https://docs.aws.amazon.com/drs/latest/userguide/ec2-launch.html) called 'Name.json' in the 'cmd-template' directory. The prefix of the .json file indicates which tag will be updated.
 
-**Important Note: If a source server has tags that match two different templates, the server will take on the template that is last uploaded to the S3 bucket**
+Replicate the baseline template(s), one per source server, and then edit:
 
-For Example:
+- Open the template, locate the **AWSElasticDisasterRecoverySourceServerID** and **Name** keys for both volume and instance ResourceTypes. Update these values to match those of the source server. 
 
-- All servers with the tag key 'Name' will be updated when 'Name.json' is uploaded to the S3 bucket. Since DRS tags all servers with a 'Name' tag by default. All servers will have their template updated.
+- Be sure each source server has a tag that matches the JSON file prefix.
 
-- Add the tag key 'DB' to all replicating databases. Rename 'Name.json' to 'DB.json' . Change the fields in the template to what you would like the values to be for databases. Then upload 'DB.json' to the bucket you created.
+**Important Note: If a source server has tags that match two different templates, the server will take on the template that is last uploaded to the S3 bucket. Templates should have a 1:1 relationship with source servers, that is, one source server per template, so more than one tag per server is counterproductive.**
 
 # Build Locally
 
