@@ -40,7 +40,26 @@ The policy has been created to only allow the minimum required permissions to en
 
 # Deployment
 
-Deploying the solution is composed of two main steps. Create the lambda functions and Create the S3 bucket trigger.
+## Automatic Deployment of the solution using Terraform
+```
+module "drs_launch_template_manager" {
+  source      = "git@github.com:aws-samples/drs-template-manager.git//terraform_deploy"
+  dr_region   = "us-east-2"                 # Region where DRS Initialized
+  name        = "demo"                      # Name to use for resource creation
+  bucket_name = "demo-drs-launch-templates" # S3 Bucket to create for JSON Templates
+  tags        = var.tags                    # Tags to apply for resources
+}
+```
+Create and Upload JSON Launch Templates to S3 bucket with name which will represent Tag.<br>
+Add relevant Tag in DRS Console per source server, so automation will apply Launch Template which represent this tag.<br>
+For example:
+* In S3 bucket we uploaded two Launch Template files: `WEB.json` and `SQL.json`
+* In DRS Console we apply TagKey: `WEB` or `SQL` to relevant Source Servers in order to automatically apply Launch Templates
+<img src="./cmd-template/example.png">
+
+
+## Manual Deployment of the solution
+Deployment composed of two main steps. Create the lambda functions and Create the S3 bucket trigger.
 
 Create the Lambda Functions:
 
