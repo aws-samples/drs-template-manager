@@ -1,3 +1,6 @@
+This repository has been archived and is no longer undergoing active development. Launch templates can now be [natively](https://aws.amazon.com/about-aws/whats-new/2023/04/aws-elastic-disaster-recovery-launch-settings-management/) managed in bulk directly with the DRS API
+
+
 # What?
 
 This package creates binaries that are built from cmd*/main.go
